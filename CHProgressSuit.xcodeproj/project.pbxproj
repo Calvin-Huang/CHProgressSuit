@@ -14,6 +14,7 @@
 		1891B3D61D1F663A0010AB39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1891B3D41D1F663A0010AB39 /* LaunchScreen.storyboard */; };
 		1891B3E11D1F663A0010AB39 /* CHProgressSuitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891B3E01D1F663A0010AB39 /* CHProgressSuitTests.swift */; };
 		1891B3EC1D1F663A0010AB39 /* CHProgressSuitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891B3EB1D1F663A0010AB39 /* CHProgressSuitUITests.swift */; };
+		1891B3FD1D1F681C0010AB39 /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891B3FC1D1F681C0010AB39 /* CircularProgress.swift */; };
 		42A8F342E444A0B0962941F6 /* Pods_CHProgressSuit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD515E2C2675D38CA8DF1D8E /* Pods_CHProgressSuit.framework */; };
 		7748FE628F7896F6F76183B6 /* Pods_CHProgressSuitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385CC411A428C90DBEAED412 /* Pods_CHProgressSuitTests.framework */; };
 		F4658FDC99166A6E199D2A35 /* Pods_CHProgressSuitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4A23490954F180119AFD3D /* Pods_CHProgressSuitUITests.framework */; };
@@ -52,6 +53,7 @@
 		1891B3E71D1F663A0010AB39 /* CHProgressSuitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CHProgressSuitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1891B3EB1D1F663A0010AB39 /* CHProgressSuitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CHProgressSuitUITests.swift; sourceTree = "<group>"; };
 		1891B3ED1D1F663A0010AB39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1891B3FC1D1F681C0010AB39 /* CircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgress.swift; sourceTree = "<group>"; };
 		385CC411A428C90DBEAED412 /* Pods_CHProgressSuitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHProgressSuitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		438C6CF235326CBA72A9A4BA /* Pods-CHProgressSuitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHProgressSuitUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CHProgressSuitUITests/Pods-CHProgressSuitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5B4A23490954F180119AFD3D /* Pods_CHProgressSuitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHProgressSuitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
