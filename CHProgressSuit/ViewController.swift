@@ -9,17 +9,34 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var circularProgress: CircularProgress!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Reset proress to zero
+        circularProgress.progress = 0
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    //MARK: - IBActions
+    @IBAction func resetButtonClicked(_: AnyObject) {
+        circularProgress.progress = 0
     }
-
-
+    
+    @IBAction func add2ButtonClicked(_: AnyObject) {
+        circularProgress.progress += 0.02
+    }
+    
+    @IBAction func add10ButtonClicked(_: AnyObject) {
+        circularProgress.progress += 0.1
+    }
+    
+    @IBAction func reduce2ButtonClicked(_: AnyObject) {
+        circularProgress.progress -= 0.02
+    }
+    
+    @IBAction func reduce10ButtonClicked(_: AnyObject) {
+        circularProgress.progress -= 0.1
+    }
 }
 
