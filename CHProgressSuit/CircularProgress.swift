@@ -83,6 +83,12 @@ import CHCubicBezier
         return 72 * scaleRate
     }
     
+    convenience init(progress: CGFloat) {
+        self.init(frame: CGRectZero)
+        
+        self.progress = progress
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
