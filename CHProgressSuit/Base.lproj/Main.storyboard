@@ -16,11 +16,98 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6G5-jZ-bKJ" customClass="CircularProgress" customModule="CHProgressSuit" customModuleProvider="target">
+                                <rect key="frame" x="220" y="220" width="160" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="2fF-ZI-Uoe"/>
+                                    <constraint firstAttribute="width" constant="160" id="lEE-0w-cm6"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHI-Y1-Wrt">
+                                <rect key="frame" x="330" y="388" width="50" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="45V-BJ-IjP"/>
+                                    <constraint firstAttribute="width" constant="50" id="bhK-hy-ZFd"/>
+                                </constraints>
+                                <state key="normal" title="+10%"/>
+                                <connections>
+                                    <action selector="add10ButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eXt-UV-MT2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldE-cs-NYa">
+                                <rect key="frame" x="220" y="388" width="50" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Rdo-VM-NiM"/>
+                                    <constraint firstAttribute="width" constant="50" id="hJ6-vd-f78"/>
+                                </constraints>
+                                <state key="normal" title="+2%"/>
+                                <connections>
+                                    <action selector="add2ButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cKg-La-UxP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JvB-Jt-due">
+                                <rect key="frame" x="330" y="178" width="50" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="0hZ-Wm-sGT"/>
+                                    <constraint firstAttribute="height" constant="34" id="K6s-nA-rS4"/>
+                                </constraints>
+                                <state key="normal" title="-10%"/>
+                                <connections>
+                                    <action selector="reduce10ButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HRP-vi-PSL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOy-gs-EMv">
+                                <rect key="frame" x="220" y="178" width="50" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="308-Xf-Ncz"/>
+                                    <constraint firstAttribute="height" constant="34" id="QTn-yO-rYV"/>
+                                </constraints>
+                                <state key="normal" title="-2%"/>
+                                <connections>
+                                    <action selector="reduce2ButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hvX-9L-7qb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPQ-dm-AkY">
+                                <rect key="frame" x="275" y="422" width="50" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="FX3-7V-vbu"/>
+                                    <constraint firstAttribute="width" constant="50" id="NeG-zR-35d"/>
+                                </constraints>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="resetButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="enc-b1-owk"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6G5-jZ-bKJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="81q-Se-4Qd"/>
+                            <constraint firstItem="CPQ-dm-AkY" firstAttribute="top" secondItem="ldE-cs-NYa" secondAttribute="bottom" id="Liu-Qd-Kf4"/>
+                            <constraint firstItem="CPQ-dm-AkY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nct-Q8-AAB"/>
+                            <constraint firstItem="mHI-Y1-Wrt" firstAttribute="top" secondItem="6G5-jZ-bKJ" secondAttribute="bottom" constant="8" id="Udj-gz-3RW"/>
+                            <constraint firstItem="6G5-jZ-bKJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="V3Z-80-y1Q"/>
+                            <constraint firstItem="mHI-Y1-Wrt" firstAttribute="trailing" secondItem="6G5-jZ-bKJ" secondAttribute="trailing" id="V4B-cs-qIP"/>
+                            <constraint firstItem="NOy-gs-EMv" firstAttribute="leading" secondItem="6G5-jZ-bKJ" secondAttribute="leading" id="Xyz-mE-zts"/>
+                            <constraint firstItem="6G5-jZ-bKJ" firstAttribute="top" secondItem="JvB-Jt-due" secondAttribute="bottom" constant="8" id="jd9-7t-sjb"/>
+                            <constraint firstItem="ldE-cs-NYa" firstAttribute="leading" secondItem="6G5-jZ-bKJ" secondAttribute="leading" id="nx9-8H-6Gg"/>
+                            <constraint firstItem="6G5-jZ-bKJ" firstAttribute="top" secondItem="NOy-gs-EMv" secondAttribute="bottom" constant="8" id="pEb-jt-hs5"/>
+                            <constraint firstItem="ldE-cs-NYa" firstAttribute="top" secondItem="6G5-jZ-bKJ" secondAttribute="bottom" constant="8" id="sCJ-bz-NyI"/>
+                            <constraint firstItem="JvB-Jt-due" firstAttribute="trailing" secondItem="6G5-jZ-bKJ" secondAttribute="trailing" id="zZd-jG-jNm"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="circularProgress" destination="6G5-jZ-bKJ" id="2YF-Hj-oo8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="565" y="478"/>
         </scene>
     </scenes>
 </document>
