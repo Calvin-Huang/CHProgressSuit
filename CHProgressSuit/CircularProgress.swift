@@ -32,28 +32,31 @@ import CHCubicBezier
     }
     @IBInspectable var progress: CGFloat = 0 {
         didSet {
-            var currentProgress = progress
+            var targetProgress = progress
             if progress > 1 {
-                currentProgress = 1
+                targetProgress = 1
             } else if progress < 0 {
-                currentProgress = 0
+                targetProgress = 0
             }
             
-            progressBar.strokeEnd = currentProgress
-            progress = currentProgress
+            progress = targetProgress
+            
+            progressAnimation.fromValue = currentProgress
+            progressAnimation.toValue = targetProgress
+            progressBar.addAnimation(progressAnimation, forKey: nil)
             
             countingStartTime = NSDate.timeIntervalSinceReferenceDate()
-            countingStartValue = oldValue
+            countingStartValue = currentProgress
             
             if displayLink == nil {
-                displayLink = CADisplayLink(target: self, selector: #selector(updateProgressText))
+                displayLink = CADisplayLink(target: self, selector: #selector(updateProgress))
                 displayLink?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
             }
         }
     }
     @IBInspectable var duration: Double = 0.25 {
         didSet {
-//            progressBar.duration = duration
+            progressAnimation.duration = duration
         }
     }
     
@@ -61,6 +64,7 @@ import CHCubicBezier
     private let progressRing = CAShapeLayer()
     private let fillBackground = CAShapeLayer()
     private let progressText = CATextLayer()
+    private let progressAnimation = CABasicAnimation(keyPath: "strokeEnd")
     private let fontWeightMedium: CGFloat = 0.230000004172325
     
     private let cubicBezier = CubicBezier(mX1: 0.42, mY1: 0, mX2: 0.58, mY2: 1)
@@ -68,6 +72,7 @@ import CHCubicBezier
     private var displayLink: CADisplayLink?
     private var countingStartTime: NSTimeInterval!
     private var countingStartValue: CGFloat = 0
+    private var currentProgress: CGFloat = 0
     
     // Default style is designed in width 168
     private var scaleRate: CGFloat {
@@ -94,6 +99,7 @@ import CHCubicBezier
         
         self.initPropertiesDefaultValue()
         self.initUI()
+        self.configure()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -101,6 +107,7 @@ import CHCubicBezier
         
         self.initPropertiesDefaultValue()
         self.initUI()
+        self.configure()
     }
     
     // MARK: - Override Methods
@@ -132,7 +139,7 @@ import CHCubicBezier
     }
     
     // MARK: - Selectors
-    func updateProgressText() {
+    func updateProgress() {
         let nowTime = NSDate.timeIntervalSinceReferenceDate()
         let changeTime = nowTime - countingStartTime
         
@@ -147,7 +154,8 @@ import CHCubicBezier
                 t = 1
             }
             
-            progressText.string = "\((Int)((countingStartValue + changeValue * (CGFloat)(cubicBezier.easing(t))) * 100))"
+            currentProgress = (countingStartValue + changeValue * CGFloat(cubicBezier.easing(t)))
+            progressText.string = "\((Int)(currentProgress * 100))"
         }
     }
     
@@ -157,22 +165,31 @@ import CHCubicBezier
         progressRingColor = UIColor(red: 187/255.0, green: 222/255.0, blue: 251/255.0, alpha: 1)
         fillColor = UIColor.clearColor()
         textColor = UIColor(red: 47/255.0, green: 125/255.0, blue: 183/255.0, alpha: 1)
-        progress = 0
+        duration = 0.25
     }
     
     private func initUI() {
         progressBar.fillColor = UIColor.clearColor().CGColor
         progressRing.fillColor = UIColor.clearColor().CGColor
         
+        progressBar.strokeEnd = progress
+        
         // Disable implict animation
         progressText.actions = ["contents": NSNull()]
         
         progressText.contentsScale = UIScreen.mainScreen().scale
         progressText.alignmentMode = kCAAlignmentCenter
+        progressText.string = "\((Int)(progress))"
         
         self.layer.addSublayer(fillBackground)
         self.layer.addSublayer(progressRing)
         self.layer.addSublayer(progressBar)
         self.layer.addSublayer(progressText)
+    }
+    
+    private func configure() {
+        progressAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.42, 0, 0.58, 1)
+        progressAnimation.removedOnCompletion = false
+        progressAnimation.fillMode = kCAFillModeForwards
     }
 }
