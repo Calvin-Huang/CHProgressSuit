@@ -13,9 +13,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Reset proress to zero
-        circularProgress.progress = 0
     }
     
     //MARK: - IBActions
