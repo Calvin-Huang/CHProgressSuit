@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "CHProgressSuit"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Simple and easy use, very effectly progress suit."
 
   s.description  = <<-DESC
@@ -32,14 +32,14 @@ CHProgressSuit provides bundles of progess view for saving your time from wastin
   # s.platform     = :ios
   # s.platform     = :ios, "5.0"
 
-  s.ios.deployment_target = "8.2"
+  s.ios.deployment_target = "8.0"
   # s.osx.deployment_target = "10.9"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
 
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.source       = { :git => "https://github.com/Calvin-Huang/CHProgressSuit.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/Calvin-Huang/CHProgressSuit.git", :tag => s.version.to_s }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
