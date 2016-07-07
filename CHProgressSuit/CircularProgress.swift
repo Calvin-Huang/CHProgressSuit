@@ -137,7 +137,11 @@ public class CircularProgress: UIView {
         
         // Unwarp variables
         guard let progressString = progressText.string else { return }
-        let font = UIFont.systemFontOfSize(fontSize, weight: UIFontWeightMedium)
+        
+        // This code is only availble for iOS 8.4+.
+        // However, our company project supports iOS 8, I need to use APIs availble in iOS 8
+        // let font = UIFont.systemFontOfSize(fontSize, weight: UIFontWeightMedium)
+        let font = UIFont(name: "HelveticaNeue-Medium", size: fontSize)!
         let textSize = progressString.sizeWithAttributes([NSFontAttributeName: font])
         
         progressText.font = font
