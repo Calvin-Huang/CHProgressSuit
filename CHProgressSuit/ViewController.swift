@@ -13,6 +13,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        circularProgress.animateCompletion = { (progress) in
+            print("Progress: \(progress)")
+        }
     }
     
     //MARK: - IBActions

@@ -60,6 +60,13 @@ public class CircularProgress: UIView {
             progressAnimation.duration = duration
         }
     }
+    public var easing: CubicBezier.Easing! {
+        didSet {
+            cubicBezier = CubicBezier(easing: easing)
+        }
+    }
+    
+    public var animateCompletion: ((progress: CGFloat) -> ())?
     
     private let progressBar = CAShapeLayer()
     private let progressRing = CAShapeLayer()
@@ -67,7 +74,7 @@ public class CircularProgress: UIView {
     private let progressText = CATextLayer()
     private let progressAnimation = CABasicAnimation(keyPath: "strokeEnd")
     
-    private let cubicBezier = CubicBezier(mX1: 0.42, mY1: 0, mX2: 0.58, mY2: 1)
+    private var cubicBezier: CubicBezier!
     
     private var displayLink: CADisplayLink?
     private var countingStartTime: NSTimeInterval!
@@ -146,6 +153,9 @@ public class CircularProgress: UIView {
         if changeTime > Double(duration) {
             displayLink?.invalidate()
             displayLink = nil
+            
+            animateCompletion?(progress: progress)
+            
         } else {
             let changeValue = progress - countingStartValue
             var t = changeTime / duration
@@ -166,6 +176,7 @@ public class CircularProgress: UIView {
         fillColor = UIColor.clearColor()
         textColor = UIColor(red: 47/255.0, green: 125/255.0, blue: 183/255.0, alpha: 1)
         duration = 0.25
+        easing = CubicBezier.Easing.EaseInOut
     }
     
     private func initUI() {
