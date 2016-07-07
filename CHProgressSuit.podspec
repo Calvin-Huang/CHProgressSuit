@@ -32,7 +32,7 @@ CHProgressSuit provides bundles of progess view for saving your time from wastin
   # s.platform     = :ios
   # s.platform     = :ios, "5.0"
 
-  s.ios.deployment_target = "8.0"
+  s.ios.deployment_target = "8.2"
   # s.osx.deployment_target = "10.9"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"

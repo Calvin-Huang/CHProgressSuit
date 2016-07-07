@@ -9,28 +9,29 @@
 import UIKit
 import CHCubicBezier
 
-@IBDesignable class CircularProgress: UIView {
-    @IBInspectable var progressBarColor: UIColor! {
+@IBDesignable
+public class CircularProgress: UIView {
+    @IBInspectable public var progressBarColor: UIColor! {
         didSet {
             progressBar.strokeColor = progressBarColor.CGColor
         }
     }
-    @IBInspectable var progressRingColor: UIColor! {
+    @IBInspectable public var progressRingColor: UIColor! {
         didSet {
             progressRing.strokeColor = progressRingColor.CGColor
         }
     }
-    @IBInspectable var fillColor: UIColor! {
+    @IBInspectable public var fillColor: UIColor! {
         didSet {
             fillBackground.fillColor = fillColor.CGColor
         }
     }
-    @IBInspectable var textColor: UIColor! {
+    @IBInspectable public var textColor: UIColor! {
         didSet {
             progressText.foregroundColor = textColor.CGColor
         }
     }
-    @IBInspectable var progress: CGFloat = 0 {
+    @IBInspectable public var progress: CGFloat = 0 {
         didSet {
             var targetProgress = progress
             if progress > 1 {
@@ -65,7 +66,6 @@ import CHCubicBezier
     private let fillBackground = CAShapeLayer()
     private let progressText = CATextLayer()
     private let progressAnimation = CABasicAnimation(keyPath: "strokeEnd")
-    private let fontWeightMedium: CGFloat = 0.230000004172325
     
     private let cubicBezier = CubicBezier(mX1: 0.42, mY1: 0, mX2: 0.58, mY2: 1)
     
@@ -88,7 +88,7 @@ import CHCubicBezier
         return 72 * scaleRate
     }
     
-    convenience init(progress: CGFloat) {
+    convenience public init(progress: CGFloat) {
         self.init(frame: CGRectZero)
         
         self.progress = progress
@@ -102,7 +102,7 @@ import CHCubicBezier
         self.configure()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         self.initPropertiesDefaultValue()
@@ -111,7 +111,7 @@ import CHCubicBezier
     }
     
     // MARK: - Override Methods
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         
         super.layoutSubviews()
         
@@ -130,7 +130,7 @@ import CHCubicBezier
         
         // Unwarp variables
         guard let progressString = progressText.string else { return }
-        let font = UIFont.systemFontOfSize(fontSize, weight: fontWeightMedium)
+        let font = UIFont.systemFontOfSize(fontSize, weight: UIFontWeightMedium)
         let textSize = progressString.sizeWithAttributes([NSFontAttributeName: font])
         
         progressText.font = font
