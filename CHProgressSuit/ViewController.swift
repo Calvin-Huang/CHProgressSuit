@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func add10ButtonClicked(_: AnyObject) {
-        circularProgress.progress += 0.1
+        circularProgress.progress += 0.2
     }
     
     @IBAction func reduce2ButtonClicked(_: AnyObject) {
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func reduce10ButtonClicked(_: AnyObject) {
-        circularProgress.progress -= 0.1
+        circularProgress.progress -= 0.2
     }
 }
 
