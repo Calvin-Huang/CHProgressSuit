@@ -42,8 +42,12 @@ public class CircularProgress: UIView {
             
             progress = targetProgress
             
-            progressAnimation.fromValue = currentProgress
-            progressAnimation.toValue = targetProgress
+            progressAnimation.values = [currentProgress, targetProgress]
+            progressAnimation.keyTimes = [0, 1]
+            
+            let controlPoints: (Float, Float, Float, Float) = (Float(cubicBezier.controlPoints.x1), Float(cubicBezier.controlPoints.x2), Float(cubicBezier.controlPoints.y1), Float(cubicBezier.controlPoints.y2))
+            
+            progressAnimation.timingFunction = CAMediaTimingFunction(controlPoints: controlPoints.0, controlPoints.2, controlPoints.1, controlPoints.3)
             progressBar.addAnimation(progressAnimation, forKey: nil)
             
             countingStartTime = NSDate.timeIntervalSinceReferenceDate()
@@ -72,7 +76,7 @@ public class CircularProgress: UIView {
     private let progressRing = CAShapeLayer()
     private let fillBackground = CAShapeLayer()
     private let progressText = CATextLayer()
-    private let progressAnimation = CABasicAnimation(keyPath: "strokeEnd")
+    private let progressAnimation = CAKeyframeAnimation(keyPath: "strokeEnd")
     
     private var cubicBezier: CubicBezier!
     
