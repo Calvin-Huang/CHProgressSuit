@@ -65,6 +65,6 @@ CHProgressSuit provides bundles of progess view for saving your time from wastin
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "CHCubicBezier"
+  s.dependency "CHCubicBezier", "~> 2.0.0"
 
 end
