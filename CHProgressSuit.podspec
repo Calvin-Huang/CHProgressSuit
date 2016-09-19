@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "CHProgressSuit"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "Simple and easy use, very effectly progress suit."
 
   s.description  = <<-DESC
