@@ -42,8 +42,10 @@ open class CircularProgress: UIView {
             
             progress = targetProgress
             
-            progressAnimation.fromValue = currentProgress
-            progressAnimation.toValue = targetProgress
+            progressAnimation.values = [currentProgress, targetProgress]
+            progressAnimation.keyTimes = [0, 1]
+            let controlPoints: (Float, Float, Float, Float) = (Float(cubicBezier.controlPoints.x1), Float(cubicBezier.controlPoints.x2), Float(cubicBezier.controlPoints.y1), Float(cubicBezier.controlPoints.y2))
+            progressAnimation.timingFunction = CAMediaTimingFunction(controlPoints: controlPoints.0, controlPoints.2, controlPoints.1, controlPoints.3)
             progressBar.add(progressAnimation, forKey: nil)
             
             countingStartTime = Date.timeIntervalSinceReferenceDate
@@ -72,7 +74,7 @@ open class CircularProgress: UIView {
     fileprivate let progressRing = CAShapeLayer()
     fileprivate let fillBackground = CAShapeLayer()
     fileprivate let progressText = CATextLayer()
-    fileprivate let progressAnimation = CABasicAnimation(keyPath: "strokeEnd")
+    fileprivate let progressAnimation = CAKeyframeAnimation(keyPath: "strokeEnd")
     
     fileprivate var cubicBezier: CubicBezier!
     
@@ -136,13 +138,13 @@ open class CircularProgress: UIView {
         fillBackground.path = circularPath
         
         // Unwarp variables
-        guard let progressString = progressText.string else { return }
+        guard let progressString = progressText.string as? NSString else { return }
         
         // This code is only availble for iOS 8.4+.
         // However, our company project supports iOS 8, I need to use APIs availble in iOS 8
         // let font = UIFont.systemFontOfSize(fontSize, weight: UIFontWeightMedium)
         let font = UIFont(name: "HelveticaNeue-Medium", size: fontSize)!
-        let textSize = (progressString as AnyObject).size(attributes: [NSFontAttributeName: font])
+        let textSize = progressString.size(attributes: [NSFontAttributeName: font])
         
         progressText.font = font
         progressText.fontSize = fontSize
