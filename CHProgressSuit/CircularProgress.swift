@@ -10,28 +10,28 @@ import UIKit
 import CHCubicBezier
 
 @IBDesignable
-public class CircularProgress: UIView {
-    @IBInspectable public var progressBarColor: UIColor! {
+open class CircularProgress: UIView {
+    @IBInspectable open var progressBarColor: UIColor! {
         didSet {
-            progressBar.strokeColor = progressBarColor.CGColor
+            progressBar.strokeColor = progressBarColor.cgColor
         }
     }
-    @IBInspectable public var progressRingColor: UIColor! {
+    @IBInspectable open var progressRingColor: UIColor! {
         didSet {
-            progressRing.strokeColor = progressRingColor.CGColor
+            progressRing.strokeColor = progressRingColor.cgColor
         }
     }
-    @IBInspectable public var fillColor: UIColor! {
+    @IBInspectable open var fillColor: UIColor! {
         didSet {
-            fillBackground.fillColor = fillColor.CGColor
+            fillBackground.fillColor = fillColor.cgColor
         }
     }
-    @IBInspectable public var textColor: UIColor! {
+    @IBInspectable open var textColor: UIColor! {
         didSet {
-            progressText.foregroundColor = textColor.CGColor
+            progressText.foregroundColor = textColor.cgColor
         }
     }
-    @IBInspectable public var progress: CGFloat = 0 {
+    @IBInspectable open var progress: CGFloat = 0 {
         didSet {
             var targetProgress = progress
             if progress > 1 {
@@ -44,18 +44,16 @@ public class CircularProgress: UIView {
             
             progressAnimation.values = [currentProgress, targetProgress]
             progressAnimation.keyTimes = [0, 1]
-            
             let controlPoints: (Float, Float, Float, Float) = (Float(cubicBezier.controlPoints.x1), Float(cubicBezier.controlPoints.x2), Float(cubicBezier.controlPoints.y1), Float(cubicBezier.controlPoints.y2))
-            
             progressAnimation.timingFunction = CAMediaTimingFunction(controlPoints: controlPoints.0, controlPoints.2, controlPoints.1, controlPoints.3)
-            progressBar.addAnimation(progressAnimation, forKey: nil)
+            progressBar.add(progressAnimation, forKey: nil)
             
-            countingStartTime = NSDate.timeIntervalSinceReferenceDate()
+            countingStartTime = Date.timeIntervalSinceReferenceDate
             countingStartValue = currentProgress
             
             if displayLink == nil {
                 displayLink = CADisplayLink(target: self, selector: #selector(updateProgress))
-                displayLink?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
+                displayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
             }
         }
     }
@@ -64,43 +62,43 @@ public class CircularProgress: UIView {
             progressAnimation.duration = duration
         }
     }
-    public var easing: CubicBezier.Easing! {
+    open var easing: CubicBezier.Easing! {
         didSet {
             cubicBezier = CubicBezier(easing: easing)
         }
     }
     
-    public var animateCompletion: ((progress: CGFloat) -> ())?
+    open var animateCompletion: ((_ progress: CGFloat) -> ())?
     
-    private let progressBar = CAShapeLayer()
-    private let progressRing = CAShapeLayer()
-    private let fillBackground = CAShapeLayer()
-    private let progressText = CATextLayer()
-    private let progressAnimation = CAKeyframeAnimation(keyPath: "strokeEnd")
+    fileprivate let progressBar = CAShapeLayer()
+    fileprivate let progressRing = CAShapeLayer()
+    fileprivate let fillBackground = CAShapeLayer()
+    fileprivate let progressText = CATextLayer()
+    fileprivate let progressAnimation = CAKeyframeAnimation(keyPath: "strokeEnd")
     
-    private var cubicBezier: CubicBezier!
+    fileprivate var cubicBezier: CubicBezier!
     
-    private var displayLink: CADisplayLink?
-    private var countingStartTime: NSTimeInterval!
-    private var countingStartValue: CGFloat = 0
-    private var currentProgress: CGFloat = 0
+    fileprivate var displayLink: CADisplayLink?
+    fileprivate var countingStartTime: TimeInterval!
+    fileprivate var countingStartValue: CGFloat = 0
+    fileprivate var currentProgress: CGFloat = 0
     
     // Default style is designed in width 168
-    private var scaleRate: CGFloat {
+    fileprivate var scaleRate: CGFloat {
         return self.bounds.width / 168
     }
-    private var progressWidth: CGFloat {
+    fileprivate var progressWidth: CGFloat {
         return 20 * scaleRate
     }
-    private var progressLength: CGFloat {
+    fileprivate var progressLength: CGFloat {
         return min(self.bounds.width - progressWidth, self.bounds.height - progressWidth)
     }
-    private var fontSize: CGFloat {
+    fileprivate var fontSize: CGFloat {
         return 72 * scaleRate
     }
     
     convenience public init(progress: CGFloat) {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
         
         self.progress = progress
     }
@@ -122,7 +120,7 @@ public class CircularProgress: UIView {
     }
     
     // MARK: - Override Methods
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         
         super.layoutSubviews()
         
@@ -134,15 +132,19 @@ public class CircularProgress: UIView {
         progressRing.lineWidth = progressWidth
         progressBar.lineWidth = progressWidth
         
-        let circularPath = UIBezierPath(roundedRect: progressRing.bounds, cornerRadius: progressLength / 2).CGPath
+        let circularPath = UIBezierPath(roundedRect: progressRing.bounds, cornerRadius: progressLength / 2).cgPath
         progressRing.path = circularPath
         progressBar.path = circularPath
         fillBackground.path = circularPath
         
         // Unwarp variables
-        guard let progressString = progressText.string else { return }
-        let font = UIFont.systemFontOfSize(fontSize, weight: UIFontWeightMedium)
-        let textSize = progressString.sizeWithAttributes([NSFontAttributeName: font])
+        guard let progressString = progressText.string as? NSString else { return }
+        
+        // This code is only availble for iOS 8.4+.
+        // However, our company project supports iOS 8, I need to use APIs availble in iOS 8
+        // let font = UIFont.systemFontOfSize(fontSize, weight: UIFontWeightMedium)
+        let font = UIFont(name: "HelveticaNeue-Medium", size: fontSize)!
+        let textSize = progressString.size(attributes: [NSFontAttributeName: font])
         
         progressText.font = font
         progressText.fontSize = fontSize
@@ -151,14 +153,15 @@ public class CircularProgress: UIView {
     
     // MARK: - Selectors
     func updateProgress() {
-        let nowTime = NSDate.timeIntervalSinceReferenceDate()
+        let nowTime = Date.timeIntervalSinceReferenceDate
+        print("\(Date.timeIntervalSinceReferenceDate), \(Date().timeIntervalSince1970)")
         let changeTime = nowTime - countingStartTime
         
         if changeTime > Double(duration) {
             displayLink?.invalidate()
             displayLink = nil
             
-            animateCompletion?(progress: progress)
+            animateCompletion?(progress)
             
         } else {
             let changeValue = progress - countingStartValue
@@ -173,26 +176,30 @@ public class CircularProgress: UIView {
         }
     }
     
-    // MARK: - Private Methods
-    private func initPropertiesDefaultValue() {
-        progressBarColor = UIColor(red: 33/255.0, green: 150/255.0, blue: 243/255.0, alpha: 1)
-        progressRingColor = UIColor(red: 187/255.0, green: 222/255.0, blue: 251/255.0, alpha: 1)
-        fillColor = UIColor.clearColor()
-        textColor = UIColor(red: 47/255.0, green: 125/255.0, blue: 183/255.0, alpha: 1)
-        duration = 0.25
-        easing = CubicBezier.Easing.EaseInOut
+    // MARK: - Public Methods
+    open func reset() {
     }
     
-    private func initUI() {
-        progressBar.fillColor = UIColor.clearColor().CGColor
-        progressRing.fillColor = UIColor.clearColor().CGColor
+    // MARK: - Private Methods
+    fileprivate func initPropertiesDefaultValue() {
+        progressBarColor = UIColor(red: 33/255.0, green: 150/255.0, blue: 243/255.0, alpha: 1)
+        progressRingColor = UIColor(red: 187/255.0, green: 222/255.0, blue: 251/255.0, alpha: 1)
+        fillColor = UIColor.clear
+        textColor = UIColor(red: 47/255.0, green: 125/255.0, blue: 183/255.0, alpha: 1)
+        duration = 0.25
+        easing = CubicBezier.Easing.easeInOut
+    }
+    
+    fileprivate func initUI() {
+        progressBar.fillColor = UIColor.clear.cgColor
+        progressRing.fillColor = UIColor.clear.cgColor
         
         progressBar.strokeEnd = progress
         
         // Disable implict animation
         progressText.actions = ["contents": NSNull()]
         
-        progressText.contentsScale = UIScreen.mainScreen().scale
+        progressText.contentsScale = UIScreen.main.scale
         progressText.alignmentMode = kCAAlignmentCenter
         progressText.string = "\((Int)(progress))"
         
@@ -202,9 +209,9 @@ public class CircularProgress: UIView {
         self.layer.addSublayer(progressText)
     }
     
-    private func configure() {
+    fileprivate func configure() {
         progressAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.42, 0, 0.58, 1)
-        progressAnimation.removedOnCompletion = false
+        progressAnimation.isRemovedOnCompletion = false
         progressAnimation.fillMode = kCAFillModeForwards
     }
 }
