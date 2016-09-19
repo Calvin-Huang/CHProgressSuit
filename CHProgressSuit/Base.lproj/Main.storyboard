@@ -27,6 +27,9 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="progress">
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHI-Y1-Wrt">
@@ -34,9 +37,9 @@
                                     <constraint firstAttribute="height" constant="34" id="45V-BJ-IjP"/>
                                     <constraint firstAttribute="width" constant="50" id="bhK-hy-ZFd"/>
                                 </constraints>
-                                <state key="normal" title="+10%"/>
+                                <state key="normal" title="+20%"/>
                                 <connections>
-                                    <action selector="add10ButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eXt-UV-MT2"/>
+                                    <action selector="add20ButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YTu-bL-GeN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldE-cs-NYa">
@@ -54,9 +57,9 @@
                                     <constraint firstAttribute="width" constant="50" id="0hZ-Wm-sGT"/>
                                     <constraint firstAttribute="height" constant="34" id="K6s-nA-rS4"/>
                                 </constraints>
-                                <state key="normal" title="-10%"/>
+                                <state key="normal" title="-20%"/>
                                 <connections>
-                                    <action selector="reduce10ButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HRP-vi-PSL"/>
+                                    <action selector="reduce20ButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="36A-am-L08"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOy-gs-EMv">
