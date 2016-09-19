@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     
     //MARK: - IBActions
     @IBAction func resetButtonClicked(_: AnyObject) {
-        circularProgress.progress = 0
+        circularProgress.reset()
     }
     
     @IBAction func add2ButtonClicked(_: AnyObject) {
