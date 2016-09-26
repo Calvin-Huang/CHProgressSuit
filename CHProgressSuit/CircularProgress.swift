@@ -103,7 +103,7 @@ open class CircularProgress: UIView {
         self.progress = progress
     }
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         self.initPropertiesDefaultValue()
